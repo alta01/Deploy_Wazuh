@@ -18,7 +18,6 @@ ForEach ($computer in $computers)
 			Invoke-Command -ComputerName $computer -ErrorAction SilentlyContinue -Credential $credential -ArgumentList $credential -Scriptblock `
 			{
 				$credential = $args[0]
-				#net use R: \\ccc-iem\deployment\wazuh /user:$credential.username $credential.getnetworkcredential().password
 				$client = new-object System.Net.WebClient
 				$client.DownloadFile("https://packages.wazuh.com/3.x/windows/wazuh-agent-3.10.2-1.msi","C:\tmp\wazuh-agent.msi")
 				cmd /c "C:\tmp\wazuh-agent.msi /q ADDRESS='10.249.0.22' AUTHD_SERVER='10.249.0.22'"
